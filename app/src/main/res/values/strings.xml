@@ -1,3 +1,30 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- General -->
     <string name="app_name">Hartige Hap Reserveren</string>
+    <string name="ok" tools:translatable="false">@android:string/ok</string>
+    <string name="cancel" tools:translatable="false">@android:string/cancel</string>
+    <string name="submit">Submit</string>
+    <string name="action_settings">Settings</string>
+    <string name="time_format">%1$d:%2$02d</string>
+
+    <!-- Reservation form -->
+    <string name="date">Date</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="persons">Number of persons</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email_address">Email address</string>
+    <string name="phone_number">Phone number</string>
+    <string name="comments">Comments (optional)</string>
+
+    <!-- Timepicker dialog -->
+    <string name="timepicker_title">Start and end time</string>
+    <string name="until">until</string>
+
+    <string-array name="form_restaurants">
+        <item>Hartige Hap</item>
+        <item>Pittige Pannenkoek</item>
+        <item>Fictief restaurant 3</item>
+    </string-array>
 </resources>

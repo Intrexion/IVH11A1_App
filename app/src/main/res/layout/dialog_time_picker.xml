@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/time_picker_label_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@android:color/secondary_text_light"
+            android:padding="@dimen/timepicker_dialog_padding"
+            android:text="18:00"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/tertiary_text_light"
+            android:padding="@dimen/timepicker_dialog_padding"
+            android:text="@string/until"/>
+
+        <TextView
+            android:id="@+id/time_picker_label_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@android:color/secondary_text_light"
+            android:padding="@dimen/timepicker_dialog_padding"
+            android:text="21:00"/>
+
+        </LinearLayout>
+
+    <edu.avans.hartigehap.a1.timepicker.RangeSeekBar
+        android:id="@+id/time_picker_seekbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        rsb:absoluteMinValue="0"
+        rsb:absoluteMaxValue="20" />
+
+</LinearLayout>

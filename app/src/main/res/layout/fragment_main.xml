@@ -1,0 +1,155 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="edu.avans.hartigehap.a1.MainFragment">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
+
+        <TableRow>
+            <ImageView android:src="@drawable/ic_food" android:layout_margin="@dimen/form_view_margin" />
+
+            <Spinner
+                android:id="@+id/form_restaurant"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_view_margin"
+                style="@style/Widget.AppCompat.Spinner.Underlined"/>
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/ic_calendar" android:layout_margin="@dimen/form_view_margin" />
+
+            <EditText
+                android:id="@+id/form_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_view_margin"
+                android:hint="@string/date"
+                android:focusable="false"
+                tools:ignore="TextFields" />
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/ic_clock" android:layout_margin="@dimen/form_view_margin" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/form_time_start"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/form_view_margin"
+                    android:hint="@string/start_time"
+                    android:focusable="false"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/form_time_end"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/form_view_margin"
+                    android:hint="@string/end_time"
+                    android:focusable="false"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/ic_numeric" android:layout_margin="@dimen/form_view_margin" />
+
+            <EditText
+                android:id="@+id/form_persons"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_view_margin"
+                android:hint="@string/persons"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="number" />
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/ic_account_outline" android:layout_margin="@dimen/form_view_margin" />
+
+            <EditText
+                android:id="@+id/form_firstname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_view_margin"
+                android:hint="@string/first_name"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="textCapSentences" />
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/ic_account" android:layout_margin="@dimen/form_view_margin" />
+
+            <EditText
+                android:id="@+id/form_lastname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_view_margin"
+                android:hint="@string/last_name"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="textCapSentences" />
+
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/ic_email" android:layout_margin="@dimen/form_view_margin" />
+
+            <EditText
+                android:id="@+id/form_email"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_view_margin"
+                android:hint="@string/email_address"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="textEmailAddress" />
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/ic_phone" android:layout_margin="@dimen/form_view_margin" />
+
+            <EditText
+                android:id="@+id/form_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_view_margin"
+                android:hint="@string/phone_number"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="phone" />
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/ic_comment" android:layout_margin="@dimen/form_view_margin" />
+
+            <EditText
+                android:id="@+id/form_comments"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_view_margin"
+                android:hint="@string/comments" />
+
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
