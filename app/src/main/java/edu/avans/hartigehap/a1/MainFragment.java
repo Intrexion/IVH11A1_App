@@ -17,6 +17,7 @@ import java.text.Format;
 import java.util.Calendar;
 import java.util.List;
 
+import edu.avans.hartigehap.a1.timepicker.Time;
 import edu.avans.hartigehap.a1.timepicker.TimePickerDialog;
 
 /**
@@ -95,12 +96,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         datePickerDialog = new DatePickerDialog(getActivity(), dateListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
-        final String timeFormat = getString(R.string.time_format);
         TimePickerDialog.TimeChangedListener listener = new TimePickerDialog.TimeChangedListener() {
             @Override
-            public void onTimeChanged(int hourStart, int minuteStart, int hourEnd, int minuteEnd) {
-                editTextTimeStart.setText(String.format(timeFormat, hourStart, minuteStart));
-                editTextTimeEnd.setText(String.format(timeFormat, hourEnd, minuteEnd));
+            public void onTimeChanged(Time startTime, Time endTime) {
+                editTextTimeStart.setText(startTime.toString());
+                editTextTimeEnd.setText(endTime.toString());
             }
         };
         timePickerDialog = new TimePickerDialog(getActivity(), listener);

@@ -11,23 +11,17 @@ import edu.avans.hartigehap.a1.R;
 
 public class TimePickerDialog extends AlertDialog implements DialogInterface.OnClickListener, RangeSeekBar.OnRangeSeekBarChangeListener {
     private TimeChangedListener mListener;
-    private TextView textViewStart;
-    private TextView textViewEnd;
-    private String timeFormat;
-
-    int mHourStart = 18, mMinuteStart = 0, mHourEnd = 21, mMinuteEnd = 0;
+    private TextView textViewStart, textViewEnd;
+    private Time startTime, endTime;
 
     public TimePickerDialog(Context context, TimeChangedListener listener) {
         super(context);
-        setTitle(R.string.timepicker_title);
-        timeFormat = context.getString(R.string.time_format);
 
-        final Context themeContext = getContext();
-        final LayoutInflater inflater = LayoutInflater.from(themeContext);
-        final View view = inflater.inflate(R.layout.dialog_time_picker, null);
+        final View view = LayoutInflater.from(context).inflate(R.layout.dialog_time_picker, null);
+        setButton(BUTTON_POSITIVE, context.getString(R.string.ok), this);
+        setButton(BUTTON_NEGATIVE, context.getString(R.string.cancel), this);
+        setTitle(R.string.timepicker_title);
         setView(view);
-        setButton(BUTTON_POSITIVE, themeContext.getString(R.string.ok), this);
-        setButton(BUTTON_NEGATIVE, themeContext.getString(R.string.cancel), this);
 
         RangeSeekBar rangeSeekBar = (RangeSeekBar) view.findViewById(R.id.time_picker_seekbar);
         rangeSeekBar.setOnRangeSeekBarChangeListener(this);
@@ -37,15 +31,18 @@ public class TimePickerDialog extends AlertDialog implements DialogInterface.OnC
 
         textViewStart = (TextView) view.findViewById(R.id.time_picker_label_start);
         textViewEnd = (TextView) view.findViewById(R.id.time_picker_label_end);
-        updateSummary();
 
+        startTime = new Time(18, 0);
+        endTime = new Time(21, 0);
+
+        updateSummary();
         setListener(listener);
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            mListener.onTimeChanged(mHourStart, mMinuteStart, mHourEnd, mMinuteEnd);
+            mListener.onTimeChanged(startTime, endTime);
         }
     }
 
@@ -58,20 +55,18 @@ public class TimePickerDialog extends AlertDialog implements DialogInterface.OnC
         double minTime = 12 + (minValue / 2d);
         double maxTime = 12 + (maxValue / 2d);
 
-        mHourStart = (int) Math.floor(minTime);
-        mMinuteStart = (int) ((minTime % 1) * 60);
-        mHourEnd = (int) Math.floor(maxTime);
-        mMinuteEnd = (int) ((maxTime % 1) * 60);
+        startTime.setTime((int) Math.floor(minTime), (int) ((minTime % 1) * 60));
+        endTime.setTime((int) Math.floor(maxTime), (int) ((maxTime % 1) * 60));
 
         updateSummary();
     }
 
     private void updateSummary() {
-        textViewStart.setText(String.format(timeFormat, mHourStart, mMinuteStart));
-        textViewEnd.setText(String.format(timeFormat, mHourEnd, mMinuteEnd));
+        textViewStart.setText(startTime.toString());
+        textViewEnd.setText(endTime.toString());
     }
 
     public static interface TimeChangedListener {
-        public void onTimeChanged(int hourStart, int minuteStart, int hourEnd, int minuteEnd);
+        public void onTimeChanged(Time startTime, Time endTime);
     }
 }

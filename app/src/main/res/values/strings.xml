@@ -5,7 +5,6 @@
     <string name="cancel" tools:translatable="false">@android:string/cancel</string>
     <string name="submit">Submit</string>
     <string name="action_settings">Settings</string>
-    <string name="time_format">%1$d:%2$02d</string>
 
     <!-- Reservation form -->
     <string name="date">Date</string>
