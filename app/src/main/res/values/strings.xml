@@ -21,10 +21,4 @@
     <!-- Timepicker dialog -->
     <string name="timepicker_title">Start and end time</string>
     <string name="until">until</string>
-
-    <string-array name="form_restaurants">
-        <item>Hartige Hap</item>
-        <item>Pittige Pannenkoek</item>
-        <item>Fictief restaurant 3</item>
-    </string-array>
 </resources>

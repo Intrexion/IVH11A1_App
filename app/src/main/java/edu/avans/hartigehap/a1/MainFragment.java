@@ -15,6 +15,7 @@ import android.widget.Spinner;
 
 import java.text.Format;
 import java.util.Calendar;
+import java.util.List;
 
 import edu.avans.hartigehap.a1.timepicker.TimePickerDialog;
 
@@ -22,6 +23,7 @@ import edu.avans.hartigehap.a1.timepicker.TimePickerDialog;
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment implements View.OnClickListener {
+    private final List<String> restaurants;
     private Format dateFormat;
 
     private EditText editTextDate;
@@ -31,6 +33,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
 
+    public MainFragment(List<String> restaurants) {
+        this.restaurants = restaurants;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
@@ -38,7 +44,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         dateFormat = android.text.format.DateFormat.getLongDateFormat(getActivity());
 
         Spinner spinner = (Spinner) rootView.findViewById(R.id.form_restaurant);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.form_restaurants, R.layout.spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, restaurants);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
