@@ -16,6 +16,18 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY" />
 
+        <TextView
+            style="@android:style/TextAppearance.Medium.Inverse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="#70000000"
+            android:text="@string/restaurants_select"
+            android:gravity="center_vertical"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+            android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+            android:paddingRight="?android:attr/listPreferredItemPaddingRight" />
+
     </FrameLayout>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -43,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="No data available"
+            android:text="@string/restaurants_empty"
             android:visibility="gone" />
 
         <TextView
@@ -52,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Error retrieving restaurants."
+            android:text="@string/restaurants_error"
             android:textColor="@android:color/holo_red_dark"
             android:visibility="gone" />
 

@@ -6,6 +6,11 @@
     <string name="submit">Submit</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Restaurant -->
+    <string name="restaurants_select">Select your desired restaurant</string>
+    <string name="restaurants_empty">No restaurants available.</string>
+    <string name="restaurants_error">Error retrieving restaurants.</string>
+
     <!-- Reservation form -->
     <string name="reservation_title">%s Reservation</string>
     <string name="date">Date</string>
