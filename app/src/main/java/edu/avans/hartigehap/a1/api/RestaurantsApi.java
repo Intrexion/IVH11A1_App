@@ -15,7 +15,7 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public class RestaurantsApi {
     public static void getRestaurants(final OnGetRestaurantListener listener) {
-        RestClient.get("restaurants", null, new JsonHttpResponseHandler() {
+        RestClient.getInstance().get("restaurants", null, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
