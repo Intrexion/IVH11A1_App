@@ -2,20 +2,17 @@ package edu.avans.hartigehap.a1;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import java.text.Format;
 import java.util.Calendar;
-import java.util.List;
 
 import edu.avans.hartigehap.a1.timepicker.Time;
 import edu.avans.hartigehap.a1.timepicker.TimePickerDialog;
@@ -23,8 +20,7 @@ import edu.avans.hartigehap.a1.timepicker.TimePickerDialog;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment implements View.OnClickListener {
-    private final List<String> restaurants;
+public class ReservationFragment extends Fragment implements View.OnClickListener {
     private Format dateFormat;
 
     private EditText editTextDate;
@@ -34,20 +30,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
 
-    public MainFragment(List<String> restaurants) {
-        this.restaurants = restaurants;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_reservation, container, false);
         rootView.requestFocus();
         dateFormat = android.text.format.DateFormat.getLongDateFormat(getActivity());
-
-        Spinner spinner = (Spinner) rootView.findViewById(R.id.form_restaurant);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, restaurants);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
 
         editTextDate = (EditText) rootView.findViewById(R.id.form_date);
         editTextDate.setOnClickListener(this);

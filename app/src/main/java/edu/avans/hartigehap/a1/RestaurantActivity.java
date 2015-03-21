@@ -4,14 +4,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import java.util.List;
-
-import edu.avans.hartigehap.a1.api.RestaurantsApi;
 
 
-public class MainActivity extends ActionBarActivity implements RestaurantsApi.OnGetRestaurantListener {
+public class RestaurantActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +14,7 @@ public class MainActivity extends ActionBarActivity implements RestaurantsApi.On
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            RestaurantsApi.getRestaurants(this);
+            getSupportFragmentManager().beginTransaction().add(R.id.container, new RestaurantFragment()).commit();
         }
     }
 
@@ -44,14 +39,5 @@ public class MainActivity extends ActionBarActivity implements RestaurantsApi.On
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    @Override
-    public void onGetRestaurants(List<String> restaurants) {
-        getSupportFragmentManager().beginTransaction().add(R.id.container, new MainFragment(restaurants)).commit();
-    }
-
-    @Override
-    public void onGetRestaurantsFailed() {
-        Toast.makeText(this, "Failed to load restaurants.", Toast.LENGTH_SHORT).show();
     }
 }
