@@ -5,11 +5,13 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.Format;
 import java.util.Calendar;
@@ -44,6 +46,7 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
         editTextTimeEnd.setOnClickListener(this);
 
         setupPickers();
+        setHasOptionsMenu(true);
 
         return rootView;
     }
@@ -91,5 +94,16 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
             }
         };
         timePickerDialog = new TimePickerDialog(getActivity(), listener);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.restaurant_submit:
+                Toast.makeText(getActivity(), getArguments().getString(ReservationActivity.ARGUMENT_RESTAURANT), Toast.LENGTH_SHORT).show();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

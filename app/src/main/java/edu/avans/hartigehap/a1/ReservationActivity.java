@@ -2,7 +2,7 @@ package edu.avans.hartigehap.a1;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-
+import android.view.Menu;
 
 public class ReservationActivity extends ActionBarActivity {
     public static final String ARGUMENT_RESTAURANT = "edu.avans.hartigehap.a1.ARGUMENT_RESTAURANT";
@@ -24,5 +24,11 @@ public class ReservationActivity extends ActionBarActivity {
 
             getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_reservations, menu);
+        return true;
     }
 }
