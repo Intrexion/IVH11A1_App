@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/settings_api">
+        <EditTextPreference
+            android:key="pref_api_host"
+            android:title="@string/settings_api_host"
+            android:defaultValue="127.0.0.1"
+            android:inputType="textUri" />
+
+        <edu.avans.hartigehap.a1.EditTextIntegerPreference
+            android:key="pref_api_port"
+            android:title="@string/settings_api_port"
+            android:defaultValue="8080"
+            android:inputType="numberSigned"
+            android:maxLength="5" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

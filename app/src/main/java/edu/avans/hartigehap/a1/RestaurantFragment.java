@@ -15,6 +15,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import edu.avans.hartigehap.a1.api.RestaurantsApi;
+import me.denley.preferenceinjector.OnPreferenceChange;
+import me.denley.preferenceinjector.PreferenceInjector;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +24,7 @@ import edu.avans.hartigehap.a1.api.RestaurantsApi;
 public class RestaurantFragment extends Fragment implements RestaurantsApi.OnGetRestaurantListener, AdapterView.OnItemClickListener {
     public static final String EXTRA_RESTAURANT = "edu.avans.hartigehap.a1.EXTRA_RESTAURANT";
 
+    boolean shouldRefresh;
     ListView listViewRestaurants;
     TextView textViewEmpty, textViewError;
     ProgressBar progressBar;
@@ -36,11 +39,30 @@ public class RestaurantFragment extends Fragment implements RestaurantsApi.OnGet
         textViewError = (TextView) view.findViewById(R.id.restaurantsError);
         progressBar = (ProgressBar) view.findViewById(R.id.restaurantsProgressBar);
 
+        shouldRefresh = (savedInstanceState == null || savedInstanceState.getBoolean("should_refresh"));
         listViewRestaurants.setOnItemClickListener(this);
-        listViewRestaurants.setEmptyView(progressBar);
-        RestaurantsApi.getRestaurants(RestaurantFragment.this);
+        PreferenceInjector.inject(getActivity(), this);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (shouldRefresh) {
+            shouldRefresh = false;
+
+            listViewRestaurants.setEmptyView(progressBar);
+            textViewError.setVisibility(View.GONE);
+            textViewEmpty.setVisibility(View.GONE);
+
+            if (restaurantAdapter != null) {
+                restaurantAdapter.clear();
+                restaurantAdapter.notifyDataSetChanged();
+            }
+
+            RestaurantsApi.getRestaurants(this);
+        }
     }
 
     @Override
@@ -63,5 +85,16 @@ public class RestaurantFragment extends Fragment implements RestaurantsApi.OnGet
         String restaurant = (String) parent.getItemAtPosition(position);
         intent.putExtra(EXTRA_RESTAURANT, restaurant);
         getActivity().startActivity(intent);
+    }
+
+    @OnPreferenceChange({"pref_api_host", "pref_api_port"})
+    public void preferencesUpdated() {
+        shouldRefresh = true;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("should_refresh", shouldRefresh);
     }
 }

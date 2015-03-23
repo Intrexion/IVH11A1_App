@@ -4,7 +4,8 @@
     <string name="ok" tools:translatable="false">@android:string/ok</string>
     <string name="cancel" tools:translatable="false">@android:string/cancel</string>
     <string name="submit">Submit</string>
-    <string name="action_settings">Settings</string>
+    <string name="form_error_empty">May not be empty</string>
+    <string name="form_error_invalid">Invalid value</string>
 
     <!-- Restaurant -->
     <string name="restaurants_select">Select your desired restaurant</string>
@@ -26,4 +27,14 @@
     <!-- Timepicker dialog -->
     <string name="timepicker_title">Start and end time</string>
     <string name="until">until</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="settings_api">API Settings</string>
+
+    <string name="settings_api_host">API host</string>
+    <string name="settings_api_host_invalid">This is not a valid host, enter either a domain or an ip-address</string>
+
+    <string name="settings_api_port">API port</string>
+    <string name="settings_api_port_invalid">This is not a valid port number</string>
 </resources>

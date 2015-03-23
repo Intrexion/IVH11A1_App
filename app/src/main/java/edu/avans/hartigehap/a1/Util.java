@@ -26,4 +26,8 @@ public class Util {
     public static boolean isEmpty(EditText editText) {
         return editText.getText().toString().trim().length() == 0;
     }
+
+    public static boolean isValidPort(int port) {
+        return (port >= 0 && port <= 65535);
+    }
 }

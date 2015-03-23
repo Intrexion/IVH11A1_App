@@ -4,14 +4,21 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import me.denley.preferenceinjector.InjectPreference;
+
 public class RestClient {
-    private static final String BASE_URL = "http://192.168.178.19:8080/hh/rest/v1/";
+    @InjectPreference(value = "pref_api_host", listen = true)
+    public String apiHost;
+    @InjectPreference(value = "pref_api_port", listen = true)
+    public int apiPort;
+    public String apiPath = "/hh/rest/v1/";
+
     private static RestClient instance;
     private AsyncHttpClient client;
 
     private RestClient() {
         client = new AsyncHttpClient();
-        client.setTimeout(5000);
+        client.setMaxRetriesAndTimeout(2, 3000);
     }
 
     public void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
@@ -22,8 +29,8 @@ public class RestClient {
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 
-    private static String getAbsoluteUrl(String relativeUrl) {
-        return BASE_URL + relativeUrl;
+    private String getAbsoluteUrl(String relativeUrl) {
+        return "http://" + apiHost + ":" + apiPort + apiPath + relativeUrl;
     }
 
     public static RestClient getInstance() {
