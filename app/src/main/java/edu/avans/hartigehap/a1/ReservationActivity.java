@@ -10,7 +10,7 @@ public class ReservationActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservation);
+        setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
             String restaurant = getIntent().getStringExtra(RestaurantFragment.EXTRA_RESTAURANT);
