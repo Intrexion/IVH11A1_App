@@ -2,8 +2,10 @@ package edu.avans.hartigehap.a1;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,10 +26,19 @@ import edu.avans.hartigehap.a1.timepicker.TimePickerDialog;
  */
 public class ReservationFragment extends Fragment implements View.OnClickListener {
     private Format dateFormat;
+    private String errorEmpty;
+    private String errorInvalid;
+    private Drawable errorDrawable;
 
     private EditText editTextDate;
     private EditText editTextTimeStart;
     private EditText editTextTimeEnd;
+    private EditText editTextPersons;
+    private EditText editTextFirstName;
+    private EditText editTextLastName;
+    private EditText editTextEmail;
+    private EditText editTextPhone;
+    private EditText editTextComments;
 
     DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
@@ -37,6 +48,10 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
         View rootView = inflater.inflate(R.layout.fragment_reservation, container, false);
         rootView.requestFocus();
         dateFormat = android.text.format.DateFormat.getLongDateFormat(getActivity());
+        errorEmpty = getString(R.string.form_error_empty);
+        errorInvalid = getString(R.string.form_error_invalid);
+        errorDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_error, null);
+        errorDrawable.setBounds(0, 0, errorDrawable.getIntrinsicWidth(), errorDrawable.getIntrinsicHeight());
 
         editTextDate = (EditText) rootView.findViewById(R.id.form_date);
         editTextDate.setOnClickListener(this);
@@ -44,6 +59,12 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
         editTextTimeStart.setOnClickListener(this);
         editTextTimeEnd = (EditText) rootView.findViewById(R.id.form_time_end);
         editTextTimeEnd.setOnClickListener(this);
+        editTextPersons = (EditText) rootView.findViewById(R.id.form_persons);
+        editTextFirstName = (EditText) rootView.findViewById(R.id.form_firstname);
+        editTextLastName = (EditText) rootView.findViewById(R.id.form_lastname);
+        editTextEmail = (EditText) rootView.findViewById(R.id.form_email);
+        editTextPhone = (EditText) rootView.findViewById(R.id.form_phone);
+        editTextComments = (EditText) rootView.findViewById(R.id.form_comments);
 
         setupPickers();
         setHasOptionsMenu(true);
@@ -81,6 +102,7 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                 calendar.set(year, monthOfYear, dayOfMonth);
                 editTextDate.setText(dateFormat.format(calendar.getTime()));
+                editTextDate.setError(null);
             }
         };
         datePickerDialog = new DatePickerDialog(getActivity(), dateListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -91,9 +113,66 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
             public void onTimeChanged(Time startTime, Time endTime) {
                 editTextTimeStart.setText(startTime.toString());
                 editTextTimeEnd.setText(endTime.toString());
+                editTextTimeEnd.setError(null);
             }
         };
         timePickerDialog = new TimePickerDialog(getActivity(), listener);
+    }
+
+    private void submit() {
+        if (isValidForm()) {
+            Toast.makeText(getActivity(), "VALID", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean isValidForm() {
+        boolean valid = true;
+
+        if (Util.isEmpty(editTextDate)) {
+            valid = false;
+            editTextDate.setError(errorEmpty, errorDrawable);
+        }
+
+        if (Util.isEmpty(editTextTimeEnd)) {
+            valid = false;
+            editTextTimeEnd.setError(errorEmpty, errorDrawable);
+        }
+
+        if (Util.isEmpty(editTextPersons)) {
+            valid = false;
+            editTextPersons.setError(errorEmpty, errorDrawable);
+        } else if (Integer.parseInt(editTextPersons.getText().toString()) <= 0) {
+            valid = false;
+            editTextPersons.setError(errorInvalid, errorDrawable);
+        }
+
+        if (Util.isEmpty(editTextFirstName)) {
+            valid = false;
+            editTextFirstName.setError(errorEmpty, errorDrawable);
+        }
+
+        if (Util.isEmpty(editTextLastName)) {
+            valid = false;
+            editTextLastName.setError(errorEmpty, errorDrawable);
+        }
+
+        if (Util.isEmpty(editTextEmail)) {
+            valid = false;
+            editTextEmail.setError(errorEmpty, errorDrawable);
+        } else if (!Util.isValidEmailAddress(editTextEmail.getText())) {
+            valid = false;
+            editTextEmail.setError(errorInvalid, errorDrawable);
+        }
+
+        if (Util.isEmpty(editTextPhone)) {
+            valid = false;
+            editTextPhone.setError(errorEmpty, errorDrawable);
+        } else if (!Util.isValidPhoneNumber(editTextPhone.getText())) {
+            valid = false;
+            editTextPhone.setError(errorInvalid, errorDrawable);
+        }
+
+        return valid;
     }
 
     @Override
@@ -101,7 +180,7 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
         int id = item.getItemId();
         switch (id) {
             case R.id.restaurant_submit:
-                Toast.makeText(getActivity(), getArguments().getString(ReservationActivity.ARGUMENT_RESTAURANT), Toast.LENGTH_SHORT).show();
+                submit();
                 return true;
         }
         return super.onOptionsItemSelected(item);
