@@ -4,4 +4,6 @@
     tools:context="edu.avans.hartigehap.a1.RestaurantActivity">
     <item android:id="@+id/action_settings" android:title="@string/settings"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_about" android:title="@string/about"
+        android:orderInCategory="200" app:showAsAction="never" />
 </menu>

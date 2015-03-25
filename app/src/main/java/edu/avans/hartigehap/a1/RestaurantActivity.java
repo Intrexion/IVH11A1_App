@@ -1,10 +1,14 @@
 package edu.avans.hartigehap.a1;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import edu.avans.hartigehap.a1.api.RestClient;
 import me.denley.preferenceinjector.PreferenceInjector;
@@ -38,9 +42,18 @@ public class RestaurantActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
-            return true;
+        } else if (id == R.id.action_about) {
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.about_title)
+                    .setMessage(Html.fromHtml(String.format(getString(R.string.about_message), getString(R.string.app_name), BuildConfig.VERSION_NAME)))
+                    .setPositiveButton(R.string.ok, null)
+                    .setIcon(R.mipmap.ic_launcher)
+                    .create();
+            dialog.show();
+            ((TextView) dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }

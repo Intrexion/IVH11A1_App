@@ -44,4 +44,9 @@
 
     <string name="settings_api_port">API port</string>
     <string name="settings_api_port_invalid">This is not a valid port number</string>
+
+    <!-- About dialog -->
+    <string name="about">About</string>
+    <string name="about_title">About this app</string>
+    <string name="about_message"><![CDATA[<b>%1$s v%2$s</b><br/><br/>The source code of both this <a href="https://github.com/Intrexion/IVH11A1_App">app</a> and the <a href="https://github.com/Intrexion/IVH11A1">server</a> are open and can be found at GitHub.<br/><br/>Copyright &#169; 2015 - IVH11A1]]></string>
 </resources>
