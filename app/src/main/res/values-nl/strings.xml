@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- General -->
+    <string name="app_name">Hartige Hap Reserveren</string>
+    <string name="submit">Verstuur</string>
+    <string name="form_error_empty">Mag niet leeg zijn</string>
+    <string name="form_error_invalid">Ongeldige waarde</string>
+
+    <!-- Restaurant -->
+    <string name="restaurants_select">Selecteer het gewenste restaurant</string>
+    <string name="restaurants_empty">Geen restaurants beschikbaar.</string>
+    <string name="restaurants_error">Fout bij het verkrijgen van restaurants.</string>
+
+    <!-- Reservation form -->
+    <string name="reservation_title">%s Reservering</string>
+    <string name="date">Datum</string>
+    <string name="start_time">Begintijd</string>
+    <string name="end_time">Eindtijd</string>
+    <string name="persons">Aantal personen</string>
+    <string name="first_name">Voornaam</string>
+    <string name="last_name">Achternaam</string>
+    <string name="email_address">E-mailadres</string>
+    <string name="phone_number">Telefoonnummer</string>
+    <string name="comments">Opmerkingen (optioneel)</string>
+
+    <!-- Reservation -->
+    <string name="reservation_submitting">Reservering plaatsen</string>
+    <string name="reservation_checking">Beschikbaarheid controleren…</string>
+    <string name="reservation_successful">Reservering succesvol geplaatst</string>
+    <string name="reservation_failed">Er zijn geen tafels vrij. Pas de datum, tijd of aantal personen aan om door te gaan.</string>
+    <string name="reservation_error">Kon de server niet bereiken. Weet je zeker dat je verbonden bent?</string>
+
+    <!-- Timepicker dialog -->
+    <string name="timepicker_title">Begin en eindtijd</string>
+    <string name="until">tot</string>
+
+    <!-- Settings -->
+    <string name="settings">Instellingen</string>
+    <string name="settings_api">API Instellingen</string>
+
+    <string name="settings_api_host">API host</string>
+    <string name="settings_api_host_invalid">Dit is geen geldige host, vul een domein of ip-adres in</string>
+
+    <string name="settings_api_port">API poort</string>
+    <string name="settings_api_port_invalid">Dit is geen geldig poortnummer</string>
+
+    <!-- About dialog -->
+    <string name="about">Over</string>
+    <string name="about_title">Over deze app</string>
+    <string name="about_message"><![CDATA[<b>%1$s v%2$s</b><br/><br/>De broncode van zowel deze <a href="https://github.com/Intrexion/IVH11A1_App">app</a> als de <a href="https://github.com/Intrexion/IVH11A1">server</a> zijn open en zijn op GitHub te vinden.<br/><br/>Copyright &#169; 2015 - IVH11A1]]></string>
+</resources>

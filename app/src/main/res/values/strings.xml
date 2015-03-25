@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
     <!-- General -->
     <string name="app_name">Hartige Hap Reservation</string>
     <string name="ok" tools:translatable="false">@android:string/ok</string>
