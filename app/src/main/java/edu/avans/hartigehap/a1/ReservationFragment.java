@@ -2,6 +2,7 @@ package edu.avans.hartigehap.a1;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,14 +18,22 @@ import android.widget.Toast;
 
 import java.text.Format;
 import java.util.Calendar;
+import java.util.Date;
 
+import edu.avans.hartigehap.a1.domain.Reservation;
+import edu.avans.hartigehap.a1.api.ReservationApi;
 import edu.avans.hartigehap.a1.timepicker.Time;
 import edu.avans.hartigehap.a1.timepicker.TimePickerDialog;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReservationFragment extends Fragment implements View.OnClickListener {
+public class ReservationFragment extends Fragment implements ReservationApi.OnSubmitReservationListener, View.OnClickListener {
+    private String restaurant;
+    private Date date;
+    private Time startTime;
+    private Time endTime;
+
     private Format dateFormat;
     private String errorEmpty;
     private String errorInvalid;
@@ -40,13 +49,16 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
     private EditText editTextPhone;
     private EditText editTextComments;
 
-    DatePickerDialog datePickerDialog;
-    TimePickerDialog timePickerDialog;
+    private DatePickerDialog datePickerDialog;
+    private TimePickerDialog timePickerDialog;
+    private ProgressDialog progress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_reservation, container, false);
         rootView.requestFocus();
+
+        restaurant = getArguments().getString(ReservationActivity.ARGUMENT_RESTAURANT);
         dateFormat = android.text.format.DateFormat.getLongDateFormat(getActivity());
         errorEmpty = getString(R.string.form_error_empty);
         errorInvalid = getString(R.string.form_error_invalid);
@@ -101,7 +113,8 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
             @Override
             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                 calendar.set(year, monthOfYear, dayOfMonth);
-                editTextDate.setText(dateFormat.format(calendar.getTime()));
+                date = calendar.getTime();
+                editTextDate.setText(dateFormat.format(date));
                 editTextDate.setError(null);
             }
         };
@@ -111,6 +124,8 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
         TimePickerDialog.TimeChangedListener listener = new TimePickerDialog.TimeChangedListener() {
             @Override
             public void onTimeChanged(Time startTime, Time endTime) {
+                ReservationFragment.this.startTime = startTime;
+                ReservationFragment.this.endTime = endTime;
                 editTextTimeStart.setText(startTime.toString());
                 editTextTimeEnd.setText(endTime.toString());
                 editTextTimeEnd.setError(null);
@@ -121,19 +136,29 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
 
     private void submit() {
         if (isValidForm()) {
-            Toast.makeText(getActivity(), "VALID", Toast.LENGTH_SHORT).show();
+            progress = ProgressDialog.show(getActivity(), getString(R.string.reservation_submitting), getString(R.string.reservation_checking));
+
+            int persons = Integer.parseInt(editTextPersons.getText().toString());
+            String firstName = editTextFirstName.getText().toString();
+            String lastName = editTextLastName.getText().toString();
+            String emailAddress = editTextEmail.getText().toString();
+            String phoneNumber = editTextPhone.getText().toString();
+            String comments = editTextComments.getText().toString();
+
+            Reservation reservation = new Reservation(restaurant, date, startTime, endTime, persons, firstName, lastName, emailAddress, phoneNumber, comments);
+            ReservationApi.submitReservation(reservation, ReservationFragment.this);
         }
     }
 
     private boolean isValidForm() {
         boolean valid = true;
 
-        if (Util.isEmpty(editTextDate)) {
+        if (date == null) {
             valid = false;
             editTextDate.setError(errorEmpty, errorDrawable);
         }
 
-        if (Util.isEmpty(editTextTimeEnd)) {
+        if (endTime == null) {
             valid = false;
             editTextTimeEnd.setError(errorEmpty, errorDrawable);
         }
@@ -184,5 +209,24 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onReservationSuccessful() {
+        progress.dismiss();
+        Toast.makeText(getActivity(), R.string.reservation_successful, Toast.LENGTH_LONG).show();
+        getActivity().finish();
+    }
+
+    @Override
+    public void onReservationFailed() {
+        progress.dismiss();
+        Toast.makeText(getActivity(), R.string.reservation_failed, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onReservationError() {
+        progress.dismiss();
+        Toast.makeText(getActivity(), R.string.reservation_error, Toast.LENGTH_LONG).show();
     }
 }

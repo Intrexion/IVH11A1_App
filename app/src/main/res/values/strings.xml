@@ -24,6 +24,13 @@
     <string name="phone_number">Phone number</string>
     <string name="comments">Comments (optional)</string>
 
+    <!-- Reservation -->
+    <string name="reservation_submitting">Submitting reservation</string>
+    <string name="reservation_checking">Checking availability…</string>
+    <string name="reservation_successful">Reservation submitted successfully</string>
+    <string name="reservation_failed">There are no free tables. Please adjust the date, time or persons in order to continue.</string>
+    <string name="reservation_error">Failed to reach server. Are you sure you\'re connected?</string>
+
     <!-- Timepicker dialog -->
     <string name="timepicker_title">Start and end time</string>
     <string name="until">until</string>
