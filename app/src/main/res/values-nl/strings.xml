@@ -2,7 +2,9 @@
 <resources>
     <!-- General -->
     <string name="app_name">Hartige Hap Reserveren</string>
+    <string name="close">Sluiten</string>
     <string name="submit">Verstuur</string>
+    <string name="copy">Kopieer</string>
     <string name="form_error_empty">Mag niet leeg zijn</string>
     <string name="form_error_invalid">Ongeldige waarde</string>
 
@@ -27,6 +29,9 @@
     <string name="reservation_submitting">Reservering plaatsen</string>
     <string name="reservation_checking">Beschikbaarheid controleren…</string>
     <string name="reservation_successful">Reservering succesvol geplaatst</string>
+    <string name="reservation_code">Reserveringscode</string>
+    <string name="reservation_code_message">Je reserveringscode is: &lt;b>%s&lt;/b>&lt;br />&lt;br />Bewaar je reservingscode goed, deze is nodig bij aankomst in het restaurant.</string>
+    <string name="reservation_code_copied">Reserveringscode gekopieerd naar het klembord</string>
     <string name="reservation_failed">Er zijn geen tafels vrij. Pas de datum, tijd of aantal personen aan om door te gaan.</string>
     <string name="reservation_error">Kon de server niet bereiken. Weet je zeker dat je verbonden bent?</string>
 
