@@ -3,7 +3,9 @@
     <string name="app_name">Hartige Hap Reservation</string>
     <string name="ok" tools:translatable="false">@android:string/ok</string>
     <string name="cancel" tools:translatable="false">@android:string/cancel</string>
+    <string name="close">Close</string>
     <string name="submit">Submit</string>
+    <string name="copy">Copy</string>
     <string name="form_error_empty">May not be empty</string>
     <string name="form_error_invalid">Invalid value</string>
 
@@ -28,6 +30,9 @@
     <string name="reservation_submitting">Submitting reservation</string>
     <string name="reservation_checking">Checking availability…</string>
     <string name="reservation_successful">Reservation submitted successfully</string>
+    <string name="reservation_code">Reservation code</string>
+    <string name="reservation_code_message">Your reservation code: &lt;b>%s&lt;/b>&lt;br />&lt;br />Make sure to keep it safe, it is needed upon arrival in restaurant.</string>
+    <string name="reservation_code_copied">Reservation code copied to the clipboard</string>
     <string name="reservation_failed">There are no free tables. Please adjust the date, time or persons in order to continue.</string>
     <string name="reservation_error">Failed to reach server. Are you sure you\'re connected?</string>
 

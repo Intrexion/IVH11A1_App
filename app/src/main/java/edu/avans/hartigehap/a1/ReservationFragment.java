@@ -1,12 +1,17 @@
 package edu.avans.hartigehap.a1;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -205,6 +210,7 @@ public class ReservationFragment extends Fragment implements ReservationApi.OnSu
         int id = item.getItemId();
         switch (id) {
             case R.id.restaurant_submit:
+                hideSoftKeyboard();
                 submit();
                 return true;
         }
@@ -212,10 +218,29 @@ public class ReservationFragment extends Fragment implements ReservationApi.OnSu
     }
 
     @Override
-    public void onReservationSuccessful() {
+    public void onReservationSuccessful(final String reservationCode) {
         progress.dismiss();
-        Toast.makeText(getActivity(), R.string.reservation_successful, Toast.LENGTH_LONG).show();
-        getActivity().finish();
+        CharSequence dialogMessage = Html.fromHtml(String.format(getString(R.string.reservation_code_message), reservationCode));
+        AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.reservation_successful)
+                .setMessage(dialogMessage)
+                .setPositiveButton(R.string.close, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getActivity().finish();
+                    }
+                }).setNeutralButton(R.string.copy, null)
+                .show();
+
+        dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Activity.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText(getString(R.string.reservation_code), reservationCode);
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(getActivity(), R.string.reservation_code_copied, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

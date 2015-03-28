@@ -38,7 +38,8 @@ public class ReservationApi {
                     String result = response.getString("result");
                     switch (result) {
                         case "OK":
-                            listener.onReservationSuccessful();
+                            String reservationCode = response.getJSONObject("reservation").getString("code");
+                            listener.onReservationSuccessful(reservationCode);
                             break;
                         case "FAIL":
                             listener.onReservationFailed();
@@ -62,7 +63,7 @@ public class ReservationApi {
     }
 
     public static interface OnSubmitReservationListener {
-        public void onReservationSuccessful();
+        public void onReservationSuccessful(String reservationCode);
         public void onReservationFailed();
         public void onReservationError();
     }
