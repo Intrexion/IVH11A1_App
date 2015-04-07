@@ -21,8 +21,9 @@ public class ReservationApi {
     public static void submitReservation(final Reservation reservation, final OnSubmitReservationListener listener) {
         RequestParams params = new RequestParams();
         params.put("restaurant.id", reservation.getRestaurant());
-        params.put("startDate", dateFormat.format(reservation.getDate()) + " " + reservation.getStartTime());
-        params.put("endDate", dateFormat.format(reservation.getDate()) + " " + reservation.getEndTime());
+        params.put("day", dateFormat.format(reservation.getDate()));
+        params.put("startTime", reservation.getStartTime());
+        params.put("endTime", reservation.getEndTime());
         params.put("customer.firstName", reservation.getFirstName());
         params.put("customer.lastName", reservation.getLastName());
         params.put("customer.partySize", reservation.getPersons());
