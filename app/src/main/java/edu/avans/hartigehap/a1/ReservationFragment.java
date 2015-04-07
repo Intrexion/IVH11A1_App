@@ -124,7 +124,7 @@ public class ReservationFragment extends Fragment implements ReservationApi.OnSu
             }
         };
         datePickerDialog = new DatePickerDialog(getActivity(), dateListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
         TimePickerDialog.TimeChangedListener listener = new TimePickerDialog.TimeChangedListener() {
             @Override
